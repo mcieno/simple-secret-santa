@@ -35,7 +35,7 @@
 export default {
   name: 'Reveal',
   props: [
-    'progressBar'
+    ''
   ],
 
   data () {
