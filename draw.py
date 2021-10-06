@@ -16,6 +16,7 @@ import re
 import sys
 import networkx as nx
 import matplotlib.pyplot as plt
+import datetime
 
 
 logging.basicConfig(
@@ -26,6 +27,9 @@ logging.basicConfig(
 
 Logger = logging.getLogger(__name__)
 
+year = datetime.datetime.now().year
+Logger.debug("Setting seed to %s", year)
+random.seed(year)
 
 parser = argparse.ArgumentParser(description=__doc__)
 
