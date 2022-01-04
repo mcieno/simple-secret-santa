@@ -1,0 +1,30 @@
+* {
+  border: none;
+  outline: none;
+}
+
+html, body {
+  background-color: #ab2328;
+  color: #fafafa;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+#app {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+  z-index: 1;
+}
+
+#santa {
+  margin: 0;
+  padding: 0;
+  position: fixed;
+}

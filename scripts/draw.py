@@ -2,21 +2,22 @@
 # -*- coding: utf8 -*-
 
 __doc__ = '''
-Make the Secret Santa drawing satisfying the given constraints.
+Make the Secret Santa draw satisfying the given constraints.
 '''
 
 import argparse
 import base64
 import collections
+import datetime
 import json
 import logging
 import os
 import random
 import re
 import sys
-import networkx as nx
+
 import matplotlib.pyplot as plt
-import datetime
+import networkx as nx
 
 
 logging.basicConfig(
@@ -26,10 +27,6 @@ logging.basicConfig(
 )
 
 Logger = logging.getLogger(__name__)
-
-year = datetime.datetime.now().year
-Logger.debug("Setting seed to %s", year)
-random.seed(year)
 
 parser = argparse.ArgumentParser(description=__doc__)
 
@@ -45,6 +42,12 @@ parser.add_argument(
     default=False,
     action='store_true',
     help=f'Plot the graph resulting from the configuration file. Default: False'
+)
+parser.add_argument(
+    '--seed',
+    default=datetime.datetime.now().year,
+    type=int,
+    help=f'Random seed used to make the draw deterministic. Default: {datetime.datetime.now().year}'
 )
 
 Sections = collections.namedtuple(
@@ -339,8 +342,9 @@ def graph_to_b64dict(d2graph: nx.DiGraph) -> list:
         present to who.
 
             {
+                'code': '123456',
                 'from': 'x',
-                'to': 'y'
+                'to': 'y' (base64 encoded)
             }
 
     '''
@@ -349,7 +353,8 @@ def graph_to_b64dict(d2graph: nx.DiGraph) -> list:
 
     for f, t in d2graph.edges:
         pairs.append({
-            'from': base64.b64encode(f.encode()).decode(),
+            'code': ''.join(str(random.choice(range(10))) for _ in range(6)),
+            'from': f,
             'to': base64.b64encode(t.encode()).decode(),
         })
 
@@ -358,6 +363,9 @@ def graph_to_b64dict(d2graph: nx.DiGraph) -> list:
 
 if __name__ == "__main__":
     args = parser.parse_args()
+
+    Logger.debug("Setting random seed to %s", args.seed)
+    random.seed(args.seed)
 
     if not os.path.isfile(args.config):
         Logger.fatal('Configuration file %s does not exist', args.config)
