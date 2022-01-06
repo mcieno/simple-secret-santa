@@ -1,46 +1,21 @@
 {
   "name": "simple-secret-santa",
-  "version": "0.0.1",
-  "private": true,
+  "version": "0.1.0",
   "scripts": {
-    "lint": "vue-cli-service lint",
-    "draw": "$(which pip3 || which pip) install --user -r requirements.txt && $(which python4 || which python) draw.py > public/pairs.json",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "dev": "vite --host 0.0.0.0",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "draw": "set -ex && $(which pip3 || which pip) install --user -r scripts/requirements.txt && $(which python3 || which python) scripts/draw.py > pairs.json"
   },
   "dependencies": {
-    "bulma": "^0.9.1",
-    "core-js": "^3.6.5",
-    "vue": "^3.0.0"
+    "three": "^0.135.0",
+    "vue": "^3.2.25"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-0",
-    "node-sass": "^5.0.0",
-    "sass-loader": "^10.1.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
-    "rules": {}
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "@types/three": "^0.135.0",
+    "@vitejs/plugin-vue": "^2.0.1",
+    "typescript": "^4.5.4",
+    "vite": "^2.7.2",
+    "vue-tsc": "^0.29.8"
+  }
 }

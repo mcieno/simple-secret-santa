@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="src/assets/logo.png" width="256" />
+  <img src=".files/logo.png" width="256" />
 </p>
 <h1 align="center">Simple Secret Santa<br />(with constraints)</h2>
 
@@ -134,9 +134,14 @@ public internet with [ngrok](https://ngrok.com/).
 ## Demo
 
 <p align="center">
-  <img src=".files/step-1.jpg" width="256" />
-  <img src=".files/step-2.jpg" width="256" />
-  <img src=".files/step-3.jpg" width="256" />
+  <img src=".files/step-1.png" width="192" />
+  <img src=".files/step-2.png" width="192" />
+  <img src=".files/step-3.png" width="192" />
+  <img src=".files/step-4.png" width="192" />
+</p>
+
+<p align="center">
+  <img src=".files/3d.gif" width="256" />
 </p>
 
 ## F.A.Q
