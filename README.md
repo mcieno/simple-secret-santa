@@ -131,6 +131,13 @@ For example, here you can learn about
 Or if you feel hackish, you can serve them locally and expose them to the
 public internet with [ngrok](https://ngrok.com/).
 
+P.S.: There's also a Dockerfile...
+
+```shell
+docker build -t simple-secret-santa .
+docker run --rm -it -p80:80 simple-secret-santa
+```
+
 ## Demo
 
 <p align="center">
