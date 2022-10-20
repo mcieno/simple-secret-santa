@@ -8,14 +8,18 @@
     "draw": "set -ex && $(which pip3 || which pip) install --user -r scripts/requirements.txt && $(which python3 || which python) scripts/draw.py > pairs.json"
   },
   "dependencies": {
-    "three": "^0.135.0",
-    "vue": "^3.2.25"
+    "three": "^0.145.0",
+    "vue": "^3.2.38"
   },
   "devDependencies": {
-    "@types/three": "^0.135.0",
-    "@vitejs/plugin-vue": "^2.0.1",
-    "typescript": "^4.5.4",
-    "vite": "^2.7.2",
-    "vue-tsc": "^0.29.8"
+    "@types/node": "^16.11.56",
+    "@types/three": "^0.144.0",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "@vue/tsconfig": "^0.1.3",
+    "npm-run-all": "^4.1.5",
+    "typescript": "~4.7.4",
+    "vite": "^3.0.9",
+    "vue-tsc": "^0.40.7"
   }
 }
