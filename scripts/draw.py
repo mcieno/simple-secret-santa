@@ -49,6 +49,13 @@ parser.add_argument(
     type=int,
     help=f'Random seed used to make the draw deterministic. Default: {datetime.datetime.now().year}'
 )
+parser.add_argument(
+    '--codes',
+    default=None,
+    type=str,
+    help=f'Specify the output file where the codes you can distribute to will be written. This is only for your convencience.'
+    # pairs.json contains the codes too
+)
 
 Sections = collections.namedtuple(
         'Sections',
@@ -350,15 +357,22 @@ def graph_to_b64dict(d2graph: nx.DiGraph) -> list:
     '''
 
     pairs = []
+    codes = []
 
     for f, t in d2graph.edges:
+        code = ''.join(str(random.choice(range(10))) for _ in range(6))
         pairs.append({
-            'code': ''.join(str(random.choice(range(10))) for _ in range(6)),
+            'code': code,
             'from': f,
             'to': base64.b64encode(t.encode()).decode(),
         })
 
-    return pairs
+        codes.append({
+            'person': f,
+            'code': code,
+        })
+
+    return pairs, codes
 
 
 if __name__ == "__main__":
@@ -394,5 +408,10 @@ if __name__ == "__main__":
         plt.show()
 
     Logger.info('Encoding and dumping result as JSON')
-    pairs = graph_to_b64dict(reduced_g)
+    pairs, codes = graph_to_b64dict(reduced_g)
+
+    if args.codes:
+        with open(args.codes, "w") as f:
+            f.write(json.dumps(codes))
+
     print(json.dumps(pairs))

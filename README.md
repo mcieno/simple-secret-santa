@@ -138,6 +138,12 @@ docker build -t simple-secret-santa .
 docker run --rm -it -p80:80 simple-secret-santa
 ```
 
+To extract the codes you can do:
+
+```shell
+docker run --rm -it simple-secret-santa cat codes.json
+```
+
 ## Demo
 
 <p align="center">
