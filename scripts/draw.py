@@ -332,7 +332,7 @@ def reduce_deg2(graph: nx.DiGraph) -> nx.DiGraph:
     return None
 
 
-def graph_to_b64dict(d2graph: nx.DiGraph) -> list:
+def graph_to_b64dict(d2graph: nx.DiGraph) -> tuple[list[dict], dict[str, str]]:
     '''\
     Convert the resulting degree-2 graph into list of dicts of base64-encoded
     from/to.
@@ -345,8 +345,8 @@ def graph_to_b64dict(d2graph: nx.DiGraph) -> list:
 
     Returns
     -------
-        A list of dictionaries made containing information about who should make a
-        present to who.
+        A pair of values where the first is a list of dictionaries containing
+        information about who should make a present to who.
 
             {
                 'code': '123456',
@@ -354,22 +354,19 @@ def graph_to_b64dict(d2graph: nx.DiGraph) -> list:
                 'to': 'y' (base64 encoded)
             }
 
+        The second returned value is a map from people to their secret code.
     '''
 
     pairs = []
-    codes = []
+    codes = {}
 
     for f, t in d2graph.edges:
         code = ''.join(str(random.choice(range(10))) for _ in range(6))
+        codes[f] = code
         pairs.append({
             'code': code,
             'from': f,
             'to': base64.b64encode(t.encode()).decode(),
-        })
-
-        codes.append({
-            'person': f,
-            'code': code,
         })
 
     return pairs, codes
