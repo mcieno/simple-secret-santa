@@ -24,6 +24,7 @@ export default class Claus {
     }
 
     object(): THREE.Object3D {
+        gltf.scene.scale.set(3, 3, 3)
         return gltf.scene
     }
 
