@@ -9,7 +9,13 @@ export async function getDraws(): Promise<Draw[]> {
 
     let draws = await response.json() as Draw[]
 
-    draws.forEach(draw => { draw.to = atob(draw.to) })
+    draws.forEach(draw => {
+        draw.to = new TextDecoder().decode(
+            Uint8Array.from(
+                atob(draw.to), c => c.codePointAt(0)!
+            )
+        )
+    })
 
     return draws
 }
