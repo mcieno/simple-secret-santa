@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 package-lock.json
 pairs.json
+
+# Conf
+*.conf
+!*.conf.example

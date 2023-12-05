@@ -35,8 +35,9 @@ Simple Secret Santa (with constraints) help your case.
 
 ## Preparation
 
-First thing first, edit [`default.conf`](./default.conf) to fit your needs. The
-configuration file structure is quite straightforward and self explanatory:
+First thing first, copy [`default.conf.example`](./default.conf.example) into
+`default.conf` and edit it to fit your needs.
+The configuration file structure is quite straightforward and self explanatory:
 
 ```ini
 [Participants]
