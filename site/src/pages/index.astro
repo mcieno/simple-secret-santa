@@ -1,0 +1,39 @@
+---
+import Layout from '~/layouts/Layout.astro';
+
+import Claus from '~/components/Claus/Claus';
+import Draw from '~/components/Draw/Draw.tsx';
+
+import i18n from '~/i18n';
+
+import pairs from '~/pairs.json';
+---
+
+<Layout title={i18n('html.title')}>
+	<Claus client:only />
+	<main>
+		<Draw client:only draws={pairs.map(pair => ({
+			...pair,
+			to: new TextDecoder().decode(
+				Uint8Array.from(
+					atob(pair.to), c => c.codePointAt(0)!
+				),
+			),
+		}))} />
+	</main>
+</Layout>
+
+<style>
+	main {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		font-size: 2.5cqmin;
+		height: 100cqh;
+		/* justify-content: center; */
+
+		.Draw {
+			margin-top: 42cqh;
+		}
+	}
+</style>

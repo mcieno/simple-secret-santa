@@ -1,0 +1,63 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths:
+      - draw/**
+
+name: Code Review - Draw
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    defaults:
+      run:
+        working-directory: draw
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+          cache: pip
+
+      - run: pip install ruff~=0.3
+
+      - run: ruff format --check --diff
+      - run: ruff check
+
+  test:
+    name: Test run
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+
+    defaults:
+      run:
+        working-directory: draw
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+          cache: pip
+          cache-dependency-path: draw/requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Show command help
+        run: ./draw.py --help
+
+      - name: Test command
+        run: |
+          ./draw.py --seed=1234 --config=../example.conf --codes=codes-1.json > pairs-1.json
+          ./draw.py --seed=1234 --config=../example.conf --codes=codes-2.json > pairs-2.json
+
+      - name: Ensure codes are equal
+        run: diff codes-1.json codes-2.json
+
+      - name: Ensure pairs are equal
+        run: diff pairs-1.json pairs-2.json

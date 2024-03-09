@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  draw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: draw
+    restart: no
+    user: "1000:1000"
+    command: python3 draw.py --help
+    working_dir: /draw
+    volumes:
+      - ./draw:/draw
+
+  site:
+    image: node:20
+    stop_grace_period: 1s
+    user: "1000:1000"
+    command: npm run dev
+    ports:
+      - "4321"
+    labels:
+      traefik.enable: true
+      traefik.http.routers.mcieno/simple-secret-santa/site.rule: Host(`simple-secret-santa.mcieno.internal`)
+      traefik.http.routers.mcieno/simple-secret-santa/site.tls: true
+    working_dir: /site
+    volumes:
+      - ./site:/site
+    environment:
+      NODE_ENV: development

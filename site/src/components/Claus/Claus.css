@@ -1,0 +1,10 @@
+.ClausCanvas {
+  canvas {
+    left: 0;
+    position: absolute;
+    z-index: -1;
+
+    height: 100% !important;
+    width: 100% !important;
+  }
+}

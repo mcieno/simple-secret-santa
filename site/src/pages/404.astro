@@ -1,0 +1,75 @@
+---
+import Layout from '~/layouts/Layout.astro';
+
+import Claus from '~/components/Claus/Claus';
+
+import i18n from '~/i18n';
+---
+
+<Layout title={`404 | ${i18n('html.title')}`}>
+	<Claus client:only />
+	<main>
+		<div class="Glitch"  style="--pieces: 5">
+			<h1 style="--index: 0">404</h1>
+			<h1 style="--index: 1">404</h1>
+			<h1 style="--index: 2">404</h1>
+			<h1 style="--index: 3">404</h1>
+			<h1 style="--index: 4">404</h1>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		font-size: 2.5cqmin;
+		height: 100cqh;
+		justify-content: center;
+
+		.Glitch {
+			display: grid;
+			grid-template-columns: 1fr;
+
+			--pieces: 3;
+
+			h1 {
+				font-size: 10em;
+				font-stretch: extra-expanded;
+				font-weight: 900;
+				letter-spacing: .1em;
+
+				grid-column-start: 1;
+				grid-row-start: 1;
+
+				--stack-height: calc(100% / var(--pieces) - .01em);
+				--inverse-index: calc(calc(var(--pieces) - 1) - var(--index));
+
+				--clip-top: calc(var(--stack-height) * var(--index));
+				--clip-bottom: calc(var(--stack-height) * var(--inverse-index));
+
+				animation: glitch 2s ease infinite 2s alternate-reverse;
+				clip-path: inset(var(--clip-top) 0 var(--clip-bottom) 0);
+
+				&:nth-child(even) {
+					--glitch-translate: -.1em;
+				}
+				&:nth-child(odd) {
+					--glitch-translate: +.1em;
+				}
+			}
+		}
+	}
+
+	@keyframes glitch {
+		0% {
+			text-shadow: -.02em +.03em 0 red, +.02em -.03em 0 blue;
+			transform: translate(var(--glitch-translate));
+		}
+		2% {
+			text-shadow: +.02em -.03em 0 red, -.02em +.03em 0 blue;
+		}
+		4%, 100% {  text-shadow: none; transform: none; }
+	}
+</style>

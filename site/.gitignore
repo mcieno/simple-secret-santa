@@ -1,0 +1,21 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# tests
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# environment variables
+.env
+.env.production

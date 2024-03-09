@@ -1,0 +1,23 @@
+.Confirmation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1em 0.2em;
+  justify-content: center;
+
+  input {
+    cursor: pointer;
+    font-size: 0.5em;
+    height: 2em;
+    width: clamp(1ch, 90cqw, 30ch);
+
+    &[name="yes"] {
+      color: var(--color-inverted);
+      background: var(--color-text);
+    }
+
+    &[name="no"] {
+      color: var(--color-text);
+      background: var(--color-inverted);
+    }
+  }
+}
