@@ -1,0 +1,144 @@
+on:
+  workflow_dispatch:
+    inputs:
+      language:
+        type: choice
+        description: The language to use
+        options:
+          - en
+          - es
+          - fr
+          - it
+        required: false
+        default: en
+      override-html-title:
+        type: string
+        description: Overrides the HTML title
+        required: false
+        default: ''
+      override-code-prompt:
+        type: string
+        description: Overrides the text prompt for the user code
+        required: false
+        default: ''
+      override-code-invalid:
+        type: string
+        description: Overrides the message for when the code is invalid
+        required: false
+        default: ''
+      override-user-hi:
+        type: string
+        description: Overrides the greeting to the user when they enter the code
+        required: false
+        default: ''
+      override-user-who:
+        type: string
+        description: Overrides the button message for uncover who's the santa
+        required: false
+        default: ''
+      override-user-back:
+        type: string
+        description: Overrides the button message for going back to the code prompt
+        required: false
+        default: ''
+      override-santa-present:
+        type: string
+        description: Overrides the "Make a present to" phrase
+        required: false
+        default: ''
+      override-santa-extra:
+        type: string
+        description: Sets an extra message in the final "Make a present to" section (e.g., "The budget is 5€").
+        required: false
+        default: ''
+
+name: Build
+
+jobs:
+  draw:
+    name: Draw
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+
+    defaults:
+      run:
+        working-directory: draw
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+          cache: pip
+          cache-dependency-path: draw/requirements.txt
+
+      - run: pip install -r requirements.txt
+
+      - name: Retrieve user-defined config
+        run: echo "${CONFIG}" > draw.conf
+        env:
+          CONFIG: ${{ vars.CONFIG }}
+
+      - name: Do the drawing
+        run: ./draw.py --config=draw.conf --codes=codes.json > pairs.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: draw.conf
+          path: draw/draw.conf
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pairs.json
+          path: draw/pairs.json
+
+      - name: Write codes to summary
+        run: |
+          echo '# Codes' >> $GITHUB_STEP_SUMMARY
+          echo ''        >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          cat codes.json >> $GITHUB_STEP_SUMMARY
+          echo ''        >> $GITHUB_STEP_SUMMARY
+          echo '```'     >> $GITHUB_STEP_SUMMARY
+
+  site:
+    name: Site
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+
+    needs: draw
+
+    defaults:
+      run:
+        working-directory: site
+
+    env:
+      PUBLIC_I18N_LANGUAGE: ${{ github.event.inputs.language }}
+      PUBLIC_I18N_OVERRIDE_HTML_TITLE: ${{ github.event.inputs.override-html-title }}
+      PUBLIC_I18N_OVERRIDE_CODE_PROMPT: ${{ github.event.inputs.override-code-prompt }}
+      PUBLIC_I18N_OVERRIDE_CODE_INVALID: ${{ github.event.inputs.override-code-invalid }}
+      PUBLIC_I18N_OVERRIDE_USER_HI: ${{ github.event.inputs.override-user-hi }}
+      PUBLIC_I18N_OVERRIDE_USER_WHO: ${{ github.event.inputs.override-user-who }}
+      PUBLIC_I18N_OVERRIDE_USER_BACK: ${{ github.event.inputs.override-user-back }}
+      PUBLIC_I18N_OVERRIDE_SANTA_PRESENT: ${{ github.event.inputs.override-santa-present }}
+      PUBLIC_I18N_OVERRIDE_SANTA_EXTRA: ${{ github.event.inputs.override-santa-extra }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache-dependency-path: site/package-lock.json
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: pairs.json
+          path: site/src/
+
+      - run: npm ci --omit=dev
+      - run: npm run build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: site/dist/

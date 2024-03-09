@@ -1,0 +1,30 @@
+{
+  "name": "simple-secret-santa",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "astro": "astro",
+    "build": "astro check && astro build",
+    "dev": "astro dev --host=0.0.0.0",
+    "preview": "astro preview",
+    "server": "node dist/server/entry.mjs",
+    "start": "astro dev --host=0.0.0.0",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.6",
+    "@astrojs/solid-js": "^4.0.1",
+    "@types/three": "^0.162.0",
+    "astro": "^4.4.13",
+    "solid-js": "^1.8.15",
+    "three": "^0.162.0",
+    "typescript": "^5.4.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.1",
+    "@types/node": "^20.11.25"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

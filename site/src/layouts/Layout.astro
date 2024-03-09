@@ -1,0 +1,88 @@
+---
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="🎁 Secret Santa 🎅 with constraints to avoid unfortunate combinations." />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+		<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<script>
+	console.log(`
+%c
+███████╗██╗   ██╗██████╗     ██╗  ██╗ █████╗  ██████╗██╗  ██╗███████╗██████╗   ██████╗
+██╔════╝██║   ██║██╔══██╗    ██║  ██║██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗  ╚════██╗
+███████╗██║   ██║██████╔╝    ███████║███████║██║     █████╔╝ █████╗  ██████╔╝    ▄███╔╝
+╚════██║██║   ██║██╔═══╝     ██╔══██║██╔══██║██║     ██╔═██╗ ██╔══╝  ██╔══██╗    ▀▀══╝
+███████║╚██████╔╝██║         ██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██║  ██║    ██╗
+╚══════╝ ╚═════╝ ╚═╝         ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝
+%c
+%c
+Do you want to organize your own Secret Santa?
+Here's the source code: https://github.com/mcieno/simple-secret-santa
+%c
+`,
+		`color: fuchsia`,
+		`color: reset`,
+		`font-size: 1.2em`,
+		`font-size: reset`,
+	);
+</script>
+
+<style is:global>
+	:root {
+		--color-background: hsl(358, 66%, 40%);
+		--color-text: #fcfcfc;
+		--color-inverted: #363958;
+		--color-accent: color-mix(in oklch, var(--color-text) 70%, var(--color-background));
+
+		@media (prefers-color-scheme: dark) {
+			--color-background: hsl(358, 65%, 14%);
+			--color-accent: color-mix(in oklch, var(--color-text) 40%, var(--color-background));
+		}
+	}
+
+	html {
+		background-color: var(--color-background);
+		color: var(--color-text);
+		font-family: system-ui, sans-serif;
+		height: 100%;
+
+		body {
+			height: 100cqh;
+			margin: 0;
+		}
+	}
+
+	input {
+		background: var(--color-text);
+		border: none;
+        border-radius: .2em;
+        box-shadow: 0 .05em 0 var(--color-accent);
+		color: var(--color-inverted);
+
+		&:active, &:focus-within, &:hover {
+			box-shadow: 0 .1em 0 var(--color-accent);
+        }
+		&:focus-within {
+			outline: solid;
+			outline-color: var(--color-accent);
+		}
+	}
+</style>

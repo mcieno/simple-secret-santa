@@ -1,0 +1,20 @@
+.Pincode {
+  fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+
+    legend {
+      display: none;
+    }
+
+    input {
+      font-size: 0.8em;
+      font-family: monospace;
+      margin: 0.1em;
+      padding: 0.05em 0.5em;
+      text-align: center;
+      width: 1ch;
+    }
+  }
+}
