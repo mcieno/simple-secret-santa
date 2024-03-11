@@ -47,10 +47,12 @@ static site hosting platform
 [AWS Amplify](https://docs.aws.amazon.com/amplify/latest/userguide/manual-deploys.html),
 what have you).
 
-### Step 1: fork the repo
+### Step 1: copy this repo
 
-First things first, in order to be able to freely configure and run the GitHub
-Actions workflow you'll need to fork this repo.
+First things first, you'll need to make your own copy of this repo in order to
+be able to freely configure and run the GitHub Actions workflow.
+Hence, let's fork it or click on
+<kbd><kbd><samp>Use this template</samp></kbd></kbd>.
 
 I also suggest you make it private, otherwise everyone will be able to read your
 configuration and tell which of your friends love/hate each other.
