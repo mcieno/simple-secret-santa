@@ -12,7 +12,7 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.7",
+    "@astrojs/check": "^0.5.10",
     "@astrojs/solid-js": "^4.0.1",
     "@types/three": "^0.162.0",
     "astro": "^4.5.1",
