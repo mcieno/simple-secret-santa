@@ -4,13 +4,32 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      all:
+        applies-to: version-updates
+        update-types:
+          - "patch"
+          - "minor"
+          - "major"
 
   - package-ecosystem: "npm"
     directory: "/site"
     schedule:
       interval: "weekly"
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - "patch"
+          - "minor"
 
   - package-ecosystem: "pip"
     directory: "/draw"
     schedule:
       interval: "weekly"
+    groups:
+      minor-and-patch:
+        applies-to: version-updates
+        update-types:
+          - "patch"
+          - "minor"
