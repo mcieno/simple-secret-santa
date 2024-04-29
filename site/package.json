@@ -15,9 +15,9 @@
     "@astrojs/check": "^0.5.10",
     "@astrojs/solid-js": "^4.1.0",
     "@types/three": "^0.163.0",
-    "astro": "^4.6.3",
-    "solid-js": "^1.8.16",
-    "three": "^0.163.0",
+    "astro": "^4.7.0",
+    "solid-js": "^1.8.17",
+    "three": "^0.164.1",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
