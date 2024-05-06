@@ -15,14 +15,14 @@
     "@astrojs/check": "^0.5.10",
     "@astrojs/solid-js": "^4.1.0",
     "@types/three": "^0.163.0",
-    "astro": "^4.6.3",
-    "solid-js": "^1.8.16",
-    "three": "^0.163.0",
+    "astro": "^4.7.1",
+    "solid-js": "^1.8.17",
+    "three": "^0.164.1",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
     "@playwright/test": "^1.43.1",
-    "@types/node": "^20.12.7"
+    "@types/node": "^20.12.10"
   },
   "engines": {
     "node": ">=20"
