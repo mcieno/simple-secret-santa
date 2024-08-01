@@ -12,16 +12,16 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@astrojs/check": "^0.6.0",
-    "@astrojs/solid-js": "^4.2.0",
-    "@types/three": "^0.164.0",
-    "astro": "^4.8.3",
-    "solid-js": "^1.8.17",
-    "three": "^0.164.1",
-    "typescript": "^5.4.5"
+    "@astrojs/check": "^0.9.1",
+    "@astrojs/solid-js": "^4.4.0",
+    "@types/three": "^0.167.1",
+    "astro": "^4.13.0",
+    "solid-js": "^1.8.19",
+    "three": "^0.167.1",
+    "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "@playwright/test": "^1.44.0",
+    "@playwright/test": "^1.45.3",
     "@types/node": "^20.12.11"
   },
   "engines": {
