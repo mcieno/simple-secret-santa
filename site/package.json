@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.45.3",
-    "@types/node": "^20.12.11"
+    "@types/node": "^22.5.2"
   },
   "engines": {
     "node": ">=20"
