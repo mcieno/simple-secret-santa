@@ -4,6 +4,7 @@ const Languages = {
   es: "Español",
   fr: "Français",
   it: "Italiano",
+  de: "Deutsch",
 };
 
 type Language = keyof typeof Languages;
@@ -67,6 +68,16 @@ const I18N = {
     "user.who": `Scopri chi hai pescato`,
     "user.back": `Torna indietro!`,
     "santa.present": `Fai un regalo a`,
+    "santa.extra": ``,
+  },
+  de: {
+    "html.title": `Wichteln`,
+    "code.prompt": `Was ist dein Code?`,
+    "code.invalid": `Ungültiger Code :/`,
+    "user.hi": `Hallo`,
+    "user.who": `Wen muss ich beschenken?`,
+    "user.back": `Zurück!`,
+    "santa.present": `Gib ein Geschenk an`,
     "santa.extra": ``,
   },
 } as const;
