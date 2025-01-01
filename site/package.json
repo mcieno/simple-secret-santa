@@ -17,12 +17,12 @@
     "@types/three": "^0.169.0",
     "astro": "^4.16.16",
     "solid-js": "^1.9.3",
-    "three": "^0.171.0",
+    "three": "^0.172.0",
     "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "@playwright/test": "^1.49.0",
-    "@types/node": "^22.10.1"
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.3"
   },
   "engines": {
     "node": ">=20"
