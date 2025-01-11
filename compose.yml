@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.9"
 
 services:
   draw:
@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
       target: draw
+      args:
+        CONFIG: example.conf
     restart: no
     user: "1000:1000"
     command: python3 draw.py --help
@@ -14,7 +16,7 @@ services:
       - ./draw:/draw
 
   site:
-    image: node:20
+    image: node:22
     stop_grace_period: 1s
     user: "1000:1000"
     command: npm run dev
@@ -29,3 +31,4 @@ services:
       - ./site:/site
     environment:
       NODE_ENV: development
+      PLAYWRIGHT_BROWSERS_PATH: 0
