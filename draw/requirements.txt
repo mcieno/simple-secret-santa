@@ -1,2 +1,2 @@
-networkx~=3.4
+networkx~=3.2
 matplotlib~=3.10
