@@ -6,6 +6,8 @@
     "astro": "astro",
     "build": "astro check && astro build",
     "dev": "astro dev --host=0.0.0.0",
+    "fmt": "prettier --write .",
+    "lint": "prettier --check .",
     "preview": "astro preview",
     "server": "node dist/server/entry.mjs",
     "start": "astro dev --host=0.0.0.0",
@@ -13,16 +15,17 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/solid-js": "^5.0.5",
-    "@types/three": "^0.174.0",
-    "astro": "^5.4.1",
+    "@astrojs/solid-js": "^5.0.7",
+    "@types/three": "^0.175.0",
+    "astro": "^5.5.6",
     "solid-js": "^1.9.5",
-    "three": "^0.174.0",
+    "three": "^0.175.0",
     "typescript": "^5.8.2"
   },
   "devDependencies": {
-    "@playwright/test": "^1.50.1",
-    "@types/node": "^22.13.8"
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.14.0",
+    "prettier": "^3.5.3"
   },
   "engines": {
     "node": ">=22"
