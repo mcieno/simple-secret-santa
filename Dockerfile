@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.12 AS draw
+FROM python:3.13 AS draw
 
 RUN --mount=type=bind,source=draw/requirements.txt,target=/tmp/requirements.txt \
     pip install -r /tmp/requirements.txt
