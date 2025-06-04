@@ -16,7 +16,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/solid-js": "^5.1.0",
-    "@types/three": "^0.175.0",
+    "@types/three": "^0.177.0",
     "astro": "^5.8.1",
     "solid-js": "^1.9.7",
     "three": "^0.177.0",
