@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
+      interval: "semiannually"
     groups:
       all:
         applies-to: version-updates
@@ -15,7 +15,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/site"
     schedule:
-      interval: "monthly"
+      interval: "semiannually"
     groups:
       minor-and-patch:
         applies-to: version-updates
@@ -26,7 +26,7 @@ updates:
   - package-ecosystem: "pip"
     directory: "/draw"
     schedule:
-      interval: "monthly"
+      interval: "semiannually"
     groups:
       minor-and-patch:
         applies-to: version-updates
