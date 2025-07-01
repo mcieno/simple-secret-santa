@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
-    "@types/node": "^22.15.29",
+    "@types/node": "^24.0.10",
     "prettier": "^3.5.3"
   },
   "engines": {
