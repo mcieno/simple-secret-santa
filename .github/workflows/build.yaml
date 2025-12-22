@@ -51,6 +51,16 @@ on:
         description: Sets an extra message in the final "Make a present to" section (e.g., "The budget is 5€").
         required: false
         default: ''
+      deploy-to-pages:
+        type: boolean
+        description: Deploy the site to GitHub Pages
+        required: false
+        default: false
+      pages-use-custom-domain:
+        type: boolean
+        description: Use a custom domain for GitHub Pages (CNAME file)
+        required: false
+        default: false
 
 name: Build
 
@@ -113,6 +123,7 @@ jobs:
         working-directory: site
 
     env:
+      PUBLIC_BASE_URL: ${{ github.event.inputs.deploy-to-pages == 'true' && github.event.inputs.pages-use-custom-domain != 'true' && format('/{0}/', github.event.repository.name) || '/' }}
       PUBLIC_I18N_LANGUAGE: ${{ github.event.inputs.language }}
       PUBLIC_I18N_OVERRIDE_HTML_TITLE: ${{ github.event.inputs.override-html-title }}
       PUBLIC_I18N_OVERRIDE_CODE_PROMPT: ${{ github.event.inputs.override-code-prompt }}
@@ -142,3 +153,28 @@ jobs:
         with:
           name: dist
           path: site/dist/
+
+      - uses: actions/upload-pages-artifact@v3
+        if: ${{ github.event.inputs.deploy-to-pages == 'true' }}
+        with:
+          path: site/dist/
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: ${{ github.event.inputs.deploy-to-pages == 'true' }}
+    needs: site
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

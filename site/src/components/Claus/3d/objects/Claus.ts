@@ -5,7 +5,7 @@ import {
 } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const gltf: GLTF = await new GLTFLoader()
-  .setPath("/models/")
+  .setPath(`${import.meta.env.BASE_URL}models/`)
   .loadAsync("claus.glb");
 
 export default class Claus {
