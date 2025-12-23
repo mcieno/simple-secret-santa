@@ -1,6 +1,11 @@
 on:
   workflow_dispatch:
     inputs:
+      site-base-path:
+        type: string
+        description: The base path where the app will be deployed
+        required: false
+        default: /
       language:
         type: choice
         description: The language to use
@@ -114,6 +119,7 @@ jobs:
         working-directory: site
 
     env:
+      SITE_BASE_PATH: ${{ github.event.inputs.site-base-path }}
       PUBLIC_I18N_LANGUAGE: ${{ github.event.inputs.language }}
       PUBLIC_I18N_OVERRIDE_HTML_TITLE: ${{ github.event.inputs.override-html-title }}
       PUBLIC_I18N_OVERRIDE_CODE_PROMPT: ${{ github.event.inputs.override-code-prompt }}
