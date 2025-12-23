@@ -14,7 +14,7 @@ services:
       - ./draw:/draw
 
   site:
-    image: node:22
+    image: node:24-alpine
     stop_grace_period: 1s
     user: "1000:1000"
     command: npm run dev

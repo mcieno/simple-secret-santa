@@ -5,6 +5,7 @@ on:
         type: choice
         description: The language to use
         options:
+          - de
           - en
           - es
           - fr
@@ -65,10 +66,10 @@ jobs:
         working-directory: draw
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
-          python-version: 3.13
+          python-version: 3.14
           cache: pip
           cache-dependency-path: draw/requirements.txt
 
@@ -82,12 +83,12 @@ jobs:
       - name: Do the drawing
         run: ./draw.py --config=draw.conf --codes=codes.json > pairs.json
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: draw.conf
           path: draw/draw.conf
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: pairs.json
           path: draw/pairs.json
@@ -124,13 +125,13 @@ jobs:
       PUBLIC_I18N_OVERRIDE_SANTA_EXTRA: ${{ github.event.inputs.override-santa-extra }}
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22
+          node-version: 24
           cache-dependency-path: site/package-lock.json
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v7
         with:
           name: pairs.json
           path: site/src/
@@ -138,7 +139,7 @@ jobs:
       - run: npm ci --omit=dev
       - run: npm run build
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v6
         with:
           name: dist
           path: site/dist/

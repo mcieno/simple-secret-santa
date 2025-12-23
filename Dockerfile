@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.13 AS draw
+FROM python:3.14 AS draw
 
 RUN --mount=type=bind,source=draw/requirements.txt,target=/tmp/requirements.txt \
     pip install -r /tmp/requirements.txt
@@ -11,7 +11,7 @@ RUN --mount=type=bind,source=$CONFIG,target=/tmp/default.conf \
     python draw.py --config /tmp/default.conf --codes codes.json > pairs.json
 
 
-FROM node:22 AS site
+FROM node:24-alpine AS site
 
 COPY ./site/package*.json ./
 RUN npm ci --omit=dev
