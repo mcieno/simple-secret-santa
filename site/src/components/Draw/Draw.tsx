@@ -3,6 +3,7 @@ import {
   createRenderEffect,
   createSignal,
   Match,
+  onMount,
   Show,
   Switch,
 } from "solid-js";
@@ -27,6 +28,15 @@ export default function Draws(props: Props) {
   const pair = createMemo(
     () => props.draws?.find((draw) => draw.code === code()) ?? null,
   );
+
+  // Check for code in URL parameters on mount
+  onMount(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlCode = params.get("code");
+    if (urlCode && urlCode.length === 6) {
+      setCode(urlCode);
+    }
+  });
 
   createRenderEffect(() => {
     if (code()) {
