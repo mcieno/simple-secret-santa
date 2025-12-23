@@ -8,4 +8,5 @@ export default defineConfig({
   server: {
     allowedHosts: true,
   },
+  base: process.env.SITE_BASE_PATH,
 });
