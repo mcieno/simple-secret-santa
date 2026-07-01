@@ -71,7 +71,7 @@ jobs:
         working-directory: draw
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v6
         with:
           python-version: 3.14
@@ -88,12 +88,12 @@ jobs:
       - name: Do the drawing
         run: ./draw.py --config=draw.conf --codes=codes.json > pairs.json
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: draw.conf
           path: draw/draw.conf
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: pairs.json
           path: draw/pairs.json
@@ -131,13 +131,13 @@ jobs:
       PUBLIC_I18N_OVERRIDE_SANTA_EXTRA: ${{ github.event.inputs.override-santa-extra }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
         with:
           node-version: 24
           cache-dependency-path: site/package-lock.json
 
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           name: pairs.json
           path: site/src/
@@ -145,7 +145,7 @@ jobs:
       - run: npm ci --omit=dev
       - run: npm run build
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: dist
           path: site/dist/
