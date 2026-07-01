@@ -20,7 +20,7 @@
     "astro": "^5.16.6",
     "solid-js": "^1.9.10",
     "three": "^0.182.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
